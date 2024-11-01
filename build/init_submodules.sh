@@ -10,8 +10,8 @@ if ! hash meson 2> /dev/null; then
 fi
 
 # Initialize submodules
-git submodule init
-git submodule update --init -f --recursive
+#git submodule init
+#git submodule update --init -f --recursive
 
 clean() {
   for mod in dpdk rdma-core spdk deps/pcm; do
@@ -28,15 +28,15 @@ if [ "$1" = "clean" ]; then
   exit 0
 fi
 
-echo building RDMA-CORE
-cd rdma-core
-git -c user.name="x" -c user.email="x" am ../build/patches/rdma-core/*
-if ! EXTRA_CMAKE_FLAGS="-DENABLE_STATIC=1 -DNO_PYVERBS=1" MAKEFLAGS=-j$CORES ./build.sh; then
-  echo "Building rdma-core failed"
-  echo "If you see \"Does not match the generator used previously\" try running \"make submodules-clean\" first"
-  exit 1
-fi
-cd ..
+# echo building RDMA-CORE
+# cd rdma-core
+# #git -c user.name="x" -c user.email="x" am ../build/patches/rdma-core/*
+# if ! EXTRA_CMAKE_FLAGS="-DENABLE_STATIC=1 -DNO_PYVERBS=1" MAKEFLAGS=-j$CORES ./build.sh; then
+#   echo "Building rdma-core failed"
+#   echo "If you see \"Does not match the generator used previously\" try running \"make submodules-clean\" first"
+#   exit 1
+# fi
+# cd ..
 
 echo building DPDK
 
@@ -54,7 +54,7 @@ export PKG_CONFIG_PATH=$PWD/rdma-core/build/lib/pkgconfig
 
 
 cd dpdk
-git apply ../build/dpdk.patch
+#git apply ../build/dpdk.patch
 meson build
 meson configure -Ddisable_drivers=$disable_driver -Dexamples='' -Denable_kmods=false -Dtests=false build
 meson configure -Dprefix=$PWD/build build

@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/linux/include",
+                "${workspaceFolder}/linux/arch/x86/include",
+                "${workspaceFolder}/inc"
+            ],
+            "defines": [
+                "LINUX_VERSION_CODE=328704" // KERNEL_VERSION(5, 4, 0)
+            ],
+            "compilerPath": "/usr/local/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "intelliSenseMode": "linux-clang-x64",
+            "configurationProvider": "ms-vscode.makefile-tools"
+        }
+    ],
+    "version": 4
+}
